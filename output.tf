@@ -2,5 +2,4 @@
 
 output "recon_ip" {
     value = aws_instance.recon.public_ip            # Outputs the public IP address of the recon machine.
-  
 }
