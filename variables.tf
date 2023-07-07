@@ -20,3 +20,7 @@ variable "whitelisted_cidr" { # Defines the whitelisted IP address(es) permitted
   default = "0.0.0.0/32" # Change this value according to your requirements (the IP address from which you are accessing the recon machine from).
 }
 
+variable "private_key" {
+  type    = string
+  default = "recon.pem"
+}
