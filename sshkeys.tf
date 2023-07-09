@@ -8,3 +8,8 @@ resource "aws_key_pair" "recon_key_pair" { # Provides an EC2 key pair resource, 
   public_key = tls_private_key.ssh_priv_key.public_key_openssh
   }
 
+resource "local_sensitive_file" "pem_file" {
+  filename = "sshkey"
+  file_permission = "600"
+  content = tls_private_key.ssh_priv_key.private_key_pem
+}

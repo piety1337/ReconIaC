@@ -17,7 +17,7 @@ variable "proxy_instance_type" {
 
 variable "whitelisted_cidr" { # Defines the whitelisted IP address(es) permitted to access or interact (ingress) with a specified port on the EC2 instance. For instance, this could be the permitted IP address(es) to SSH into the recon machine.
   type    = string
-  default = "0.0.0.0/32" # Change this value according to your requirements (the IP address from which you are accessing the recon machine from).
+  default = "0.0.0.0/0" # Change this value according to your requirements (the IP address from which you are accessing the recon machine from).
 }
 
 variable "private_key" {

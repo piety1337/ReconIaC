@@ -39,16 +39,6 @@ resource "aws_internet_gateway" "internet_gateway" { # Defines the Internet gate
   }
 }
 
-#resource "aws_eip" "nat" { # Provides an elastic (public IP) to the NAT gateway
-#  domain = "vpc"           # Indicates if this EIP is for use in VPC
-#}
-
-#resource "aws_nat_gateway" "nat_gateway" {                      # Defines the NAT gateway, which enables instances in private subnets to connect to the internet. It must be deployed in the public subnet with an elastic IP.
-#  allocation_id = aws_eip.nat.id                                # Attatches the elastic IP as defined from the previous resource.
-#  subnet_id     = aws_subnet.proxy_subnet.id                    # Defines where the NAT gateway is situated (must be in the public subnet i.e. the proxy subnet).
-#  depends_on    = [aws_internet_gateway.proxy_internet_gateway] # Adds an explicit dependency on the Internet Gateway for the VPC.
-#}
-
 resource "aws_route_table" "public_route_table" { # Defines which external IPs are accessable from the Internet gateway.
   vpc_id = aws_vpc.main_vpc.id
   route {
@@ -57,28 +47,15 @@ resource "aws_route_table" "public_route_table" { # Defines which external IPs a
   }
 }
 
-resource "aws_route_table_association" "public_route_table_association_1" { # Creates an association between a route table and a subnets.
+resource "aws_route_table_association" "public_route_table_association_1" { # Creates an association between a route table and a proxy subnet.
   subnet_id      = aws_subnet.proxy_subnet.id
   route_table_id = aws_route_table.public_route_table.id
 }
 
-resource "aws_route_table_association" "public_route_table_association_2" { # Creates an association between a route table and a subnets.
+resource "aws_route_table_association" "public_route_table_association_2" { # Creates an association between a route table and a recon subnet.
   subnet_id      = aws_subnet.recon_subnet.id
   route_table_id = aws_route_table.public_route_table.id
 }
-#resource "aws_route_table" "private_route_table" { # Defines which external IPs are accessible from the NAT gateway, i.e. from the recon subnet.
-#  vpc_id = aws_vpc.main_vpc.id
-#  route {
-#    cidr_block     = "0.0.0.0/0" # Specifies that all IPs are accessable from the recon subnet.
-#    nat_gateway_id = aws_nat_gateway.nat_gateway.id
-#  }
-#}
-
-
-#resource "aws_route_table_association" "private_route_table_association" { # Creates an association between the recon subnet and the private routing table, which specifies that the recon subnet can access the Internet through the NAT gateway.
-#  subnet_id      = aws_subnet.recon_subnet.id
-# route_table_id = aws_route_table.private_route_table.id
-#}
 
 resource "aws_network_interface" "private_ip_recon" { # Recon machine
   subnet_id   = aws_subnet.recon_subnet.id

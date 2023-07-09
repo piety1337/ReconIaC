@@ -23,8 +23,10 @@ output "proxy_5_ip" {
   value = aws_instance.proxy_5.public_ip
 }
 
-output "recon_private_key" {
+output "private_key" {
   value     = tls_private_key.ssh_priv_key.private_key_pem
   sensitive = true
 }
+
+
 

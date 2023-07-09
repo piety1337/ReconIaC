@@ -11,6 +11,6 @@ terraform { # Defines the Terraform block (Terraform settings).
 
 provider "aws" {
   region     = "eu-west-2"            # Defines the region.
-  access_key = "XXXXXXXXXXXXXXXXXXX" # Access key and secret key are used to authenticate to your AWS account in order to create the infrastructure.
-  secret_key = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+  access_key = "XXXXXXXXXXXXXXXX" # Access key and secret key are used to authenticate to your AWS account in order to create the infrastructure.
+  secret_key = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 }
