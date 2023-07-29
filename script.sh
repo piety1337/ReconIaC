@@ -47,6 +47,8 @@ sudo apt install proxychains4 -y
 git clone https://github.com/jamesbcook/proxy-ng.git
 cd proxy-ng
 make
+wget https://github.com/jamesbcook/proxy-ng/releases/download/0.2.0/proxy-ng-linux
+chmod +x proxy-ng-linux
 cd ..
 
 # Create file with notes
